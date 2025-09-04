@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Service configurations
+// Service configurations ww
 const services = [
   {
     name: "auth-service",
@@ -26,9 +26,7 @@ const services = [
     script: "index.js",
   },
   {
-
     name: "live-interview-service",
-
 
     path: "./live-interview-service",
     port: 6004,
