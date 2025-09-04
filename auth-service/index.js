@@ -19,7 +19,7 @@ import "./config/passport.js";
 
 // Environment Configuration
 const NODE_ENV = process.env.NODE_ENV || "development";
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 6001;
 const ALLOWED_ORIGINS = [
   "http://localhost:3000",
   "http://localhost:4001",
@@ -35,7 +35,7 @@ const SERVICE_VERSION = "v1.0.0";
 
 // Express App Setup
 const app = express();
-
+// jjj
 // Trust proxy for accurate IP addresses
 app.set("trust proxy", 1);
 
