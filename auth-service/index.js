@@ -1,21 +1,21 @@
-import express from "express";
-import { connectDB } from "./config/database.js";
-import cors from "cors";
-import helmet from "helmet";
-import rateLimit from "express-rate-limit";
-import compression from "compression";
-import session from "express-session";
-import MongoStore from "connect-mongo";
-import passport from "passport";
-import "dotenv/config";
-import path from "path";
+const express = require("express");
+const { connectDB } = require("./config/database");
+const cors = require("cors");
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+const compression = require("compression");
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
+const passport = require("passport");
+require("dotenv").config();
+const path = require("path");
 
 // Routes
-import authRoutes from "./routes/authRoutes.js";
-import userRoutes from "./routes/userRoutes.js";
+const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 // Passport configuration
-import "./config/passport.js";
+require("./config/passport");
 
 // Environment Configuration
 const NODE_ENV = process.env.NODE_ENV || "development";
@@ -270,4 +270,4 @@ process.on("unhandledRejection", (reason, promise) => {
 // Start the server
 startServer();
 
-export { app };
+module.exports = app;

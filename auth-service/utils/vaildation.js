@@ -13,7 +13,7 @@ const phoneRegex = /^\+?[\d\s\-\(\)]+$/;
 const urlRegex = /^https?:\/\/.+/;
 
 // Validate email
-export const validateEmail = (email) => {
+const validateEmail = (email) => {
   if (!email) {
     return { isValid: false, message: "Email is required" };
   }
@@ -26,7 +26,7 @@ export const validateEmail = (email) => {
 };
 
 // Validate password
-export const validatePassword = (password) => {
+const validatePassword = (password) => {
   if (!password) {
     return { isValid: false, message: "Password is required" };
   }
@@ -50,7 +50,7 @@ export const validatePassword = (password) => {
 };
 
 // Validate name
-export const validateName = (name, fieldName = "Name") => {
+const validateName = (name, fieldName = "Name") => {
   if (!name) {
     return { isValid: false, message: `${fieldName} is required` };
   }
@@ -77,7 +77,7 @@ export const validateName = (name, fieldName = "Name") => {
 };
 
 // Validate phone number
-export const validatePhoneNumber = (phone) => {
+const validatePhoneNumber = (phone) => {
   if (!phone) {
     return { isValid: true }; // Phone is optional
   }
@@ -90,7 +90,7 @@ export const validatePhoneNumber = (phone) => {
 };
 
 // Validate URL
-export const validateUrl = (url, fieldName = "URL") => {
+const validateUrl = (url, fieldName = "URL") => {
   if (!url) {
     return { isValid: true }; // URL is optional
   }
@@ -103,7 +103,7 @@ export const validateUrl = (url, fieldName = "URL") => {
 };
 
 // Validate user type
-export const validateUserType = (userType) => {
+const validateUserType = (userType) => {
   const validTypes = ["candidate", "interviewer", "admin"];
 
   if (!userType) {
@@ -121,7 +121,7 @@ export const validateUserType = (userType) => {
 };
 
 // Main validation function for user input
-export const validateInput = (data) => {
+const validateInput = (data) => {
   const errors = [];
 
   // Validate email
@@ -226,7 +226,7 @@ export const validateInput = (data) => {
 };
 
 // Validate registration data
-export const validateRegistration = (data) => {
+const validateRegistration = (data) => {
   const requiredFields = ["email", "password", "firstName", "lastName"];
   const errors = [];
 
@@ -247,7 +247,7 @@ export const validateRegistration = (data) => {
 };
 
 // Validate login data
-export const validateLogin = (data) => {
+const validateLogin = (data) => {
   const errors = [];
 
   if (!data.email) {
@@ -265,7 +265,7 @@ export const validateLogin = (data) => {
 };
 
 // Sanitize user input
-export const sanitizeInput = (data) => {
+const sanitizeInput = (data) => {
   const sanitized = {};
 
   for (const [key, value] of Object.entries(data)) {
@@ -277,4 +277,17 @@ export const sanitizeInput = (data) => {
   }
 
   return sanitized;
+};
+
+module.exports = {
+  validateEmail,
+  validatePassword,
+  validateName,
+  validatePhoneNumber,
+  validateUrl,
+  validateUserType,
+  validateInput,
+  validateRegistration,
+  validateLogin,
+  sanitizeInput
 };

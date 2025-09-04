@@ -1,14 +1,14 @@
 // middleware/authMiddleware.js
-import User from "../models/User.js";
+const User = require("../models/User");
 
 // Session-based Authentication Middleware
-export const requireAuth = async (req, res, next) => {
+const requireAuth = async (req, res, next) => {
   // alias for ensureAuthenticated
   return ensureAuthenticated(req, res, next);
 };
 
 // Passport session check
-export const ensureAuthenticated = async (req, res, next) => {
+const ensureAuthenticated = async (req, res, next) => {
   try {
     console.log("Checking authentication for user:", req.user);
     // Check if user is authenticated via session
@@ -41,7 +41,7 @@ export const ensureAuthenticated = async (req, res, next) => {
 };
 
 // Authorization Middleware
-export const requireAdmin = (req, res, next) => {
+const requireAdmin = (req, res, next) => {
   if (!req.user) {
     return res.status(401).json({
       success: false,
@@ -60,7 +60,7 @@ export const requireAdmin = (req, res, next) => {
 };
 
 // Interviewer Authorization
-export const requireInterviewer = (req, res, next) => {
+const requireInterviewer = (req, res, next) => {
   if (!req.user) {
     return res.status(401).json({
       success: false,
@@ -79,7 +79,7 @@ export const requireInterviewer = (req, res, next) => {
 };
 
 // Multiple Role Authorization
-export const requireRole = (...roles) => {
+const requireRole = (...roles) => {
   return (req, res, next) => {
     if (!req.user) {
       return res.status(401).json({
@@ -100,7 +100,7 @@ export const requireRole = (...roles) => {
 };
 
 // Email Verification Middleware
-export const requireEmailVerification = (req, res, next) => {
+const requireEmailVerification = (req, res, next) => {
   if (!req.user) {
     return res.status(401).json({
       success: false,
@@ -119,7 +119,7 @@ export const requireEmailVerification = (req, res, next) => {
 };
 
 // Optional Authentication (for public routes that can benefit from user context)
-export const optionalAuth = async (req, res, next) => {
+const optionalAuth = async (req, res, next) => {
   try {
     if (req.isAuthenticated() && req.user) {
       const user = await User.findById(req.user._id);
@@ -135,7 +135,7 @@ export const optionalAuth = async (req, res, next) => {
 };
 
 // Check if user owns resource
-export const requireOwnership = (resourceField = "userId") => {
+const requireOwnership = (resourceField = "userId") => {
   return (req, res, next) => {
     if (!req.user) {
       return res.status(401).json({
@@ -160,4 +160,15 @@ export const requireOwnership = (resourceField = "userId") => {
 
     next();
   };
+};
+
+module.exports = {
+  requireAuth,
+  ensureAuthenticated,
+  requireAdmin,
+  requireInterviewer,
+  requireRole,
+  requireEmailVerification,
+  optionalAuth,
+  requireOwnership
 };

@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  auth-service:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    ports:
+      - "6001:6001"
+    env_file:
+      - ./auth-service/.env
+    depends_on:
+      - mongodb
+
+  gateway-service:
+    build:
+      context: ./gateway-service
+      dockerfile: Dockerfile
+    ports:
+      - "6002:6002"
+    env_file:
+      - ./gateway-service/.env
+
+  live-interview-service:
+    build:
+      context: ./live-interview-service
+      dockerfile: Dockerfile
+    ports:
+      - "6004:6004"
+    env_file:
+      - ./live-interview-service/.env
+    depends_on:
+      - mongodb
+
+  mock-interview-service:
+    build:
+      context: ./mock-interview-service
+      dockerfile: Dockerfile
+    ports:
+      - "6003:6003"
+    env_file:
+      - ./mock-interview-service/.env
+    depends_on:
+      - mongodb
+
+  room-interview-service:
+    build:
+      context: ./room-interview-service
+      dockerfile: Dockerfile
+    ports:
+      - "6005:6005"
+    env_file:
+      - ./room-interview-service/.env
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:

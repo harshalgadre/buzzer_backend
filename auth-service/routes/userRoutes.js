@@ -1,8 +1,8 @@
-import express from "express";
-import { getProfile, updateProfile, uploadResume, getInterviewHistory } from "../controllers/authController.js";
-import { ensureAuthenticated } from "../middleware/authMiddleware.js";
-import multer from "multer";
-import cloudinaryStorage from "../config/cloudinaryMulter.js";
+const express = require("express");
+const { getProfile, updateProfile, uploadResume, getInterviewHistory } = require("../controllers/authController");
+const { ensureAuthenticated } = require("../middleware/authMiddleware");
+const multer = require("multer");
+const cloudinaryStorage = require("../config/cloudinaryMulter");
 
 const router = express.Router();
 
@@ -24,4 +24,4 @@ router.post("/resume", ensureAuthenticated, upload.single("resume"), uploadResum
 // Get interview history
 router.get("/interviews", ensureAuthenticated, getInterviewHistory);
 
-export default router;
+module.exports = router;

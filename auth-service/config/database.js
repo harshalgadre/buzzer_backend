@@ -1,9 +1,9 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const dbURI =
   "mongodb+srv://lanbixinfo:VfcMo7euOiX1mJ1w@interview-backend.p4usgoo.mongodb.net/interview?retryWrites=true&w=majority&appName=Interview-backend";
 
-export const connectDB = async () => {
+const connectDB = async () => {
   const options = {
     useNewUrlParser: true, // Deprecated, but necessary in older versions
     useUnifiedTopology: true, // Use MongoDB's native driver for connection pooling
@@ -23,3 +23,5 @@ export const connectDB = async () => {
     process.exit(1);
   }
 };
+
+module.exports = { connectDB };

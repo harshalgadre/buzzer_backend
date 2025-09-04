@@ -1,8 +1,8 @@
 // routes/authRoutes.js
-import express from "express";
-import passport from "passport";
-import { uploadResume } from "../middleware/Multer.js";
-import {
+const express = require("express");
+const passport = require("passport");
+const { uploadResume } = require("../middleware/Multer");
+const {
   register,
   login,
   logout,
@@ -14,8 +14,8 @@ import {
   forgotPassword,
   resetPassword,
   updateUserType,
-} from "../controllers/authController.js";
-import { requireAuth, requireAdmin } from "../middleware/authMiddleware.js";
+} = require("../controllers/authController");
+const { requireAuth, requireAdmin } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
@@ -53,4 +53,4 @@ router.post("/reset-password/:token", resetPassword);
 
 router.put("/user-type", requireAuth, requireAdmin, updateUserType);
 
-export default router;
+module.exports = router;

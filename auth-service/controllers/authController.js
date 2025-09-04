@@ -1,5 +1,5 @@
 // Get user profile
-export const getProfile = async (req, res) => {
+const getProfile = async (req, res) => {
   try {
     // Return basic user info (customize as needed)
     const user = req.user;
@@ -12,7 +12,7 @@ export const getProfile = async (req, res) => {
 // Update user profile
 
 // Upload resume
-export const uploadResume = async (req, res) => {
+const uploadResume = async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ success: false, error: "No file uploaded" });
@@ -29,7 +29,7 @@ export const uploadResume = async (req, res) => {
   }
 };
 // Get Interview History
-export const getInterviewHistory = async (req, res) => {
+const getInterviewHistory = async (req, res) => {
   try {
     // Placeholder: Replace with real DB query for user's interview history
     const sampleHistory = [
@@ -52,12 +52,12 @@ export const getInterviewHistory = async (req, res) => {
   }
 };
 // controllers/authController.js
-import User from "../models/User.js";
-import { validateInput } from "../utils/vaildation.js";
-import crypto from "crypto";
+const User = require("../models/User");
+const { validateInput } = require("../utils/vaildation");
+const crypto = require("crypto");
 
 // Register new user
-export const register = async (req, res) => {
+const register = async (req, res) => {
   try {
     const { email, password, firstName, lastName, userType, phoneNumber } =
       req.body;
@@ -129,7 +129,7 @@ export const register = async (req, res) => {
 };
 
 // Login user
-export const login = async (req, res) => {
+const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -222,7 +222,7 @@ export const login = async (req, res) => {
 };
 
 // Google OAuth success callback
-export const googleCallback = async (req, res) => {
+const googleCallback = async (req, res) => {
   try {
     console.log("Google OAuth Callback Started");
 
@@ -259,7 +259,7 @@ export const googleCallback = async (req, res) => {
 };
 
 // Logout user
-export const logout = async (req, res) => {
+const logout = async (req, res) => {
   try {
     const user = req.user;
 
@@ -300,7 +300,7 @@ export const logout = async (req, res) => {
 };
 
 // Verify email
-export const verifyEmail = async (req, res) => {
+const verifyEmail = async (req, res) => {
   try {
     const { token } = req.params;
 
@@ -337,7 +337,7 @@ export const verifyEmail = async (req, res) => {
 };
 
 // Get current user
-export const getCurrentUser = async (req, res) => {
+const getCurrentUser = async (req, res) => {
   try {
     const user = req.user;
 
@@ -373,7 +373,7 @@ export const getCurrentUser = async (req, res) => {
 };
 
 // Unified Update user profile (handles candidate fields too)
-export const updateProfile = async (req, res) => {
+const updateProfile = async (req, res) => {
   try {
     const user = req.user;
     if (!user) {
@@ -441,7 +441,7 @@ export const updateProfile = async (req, res) => {
 };
 
 // Change password
-export const changePassword = async (req, res) => {
+const changePassword = async (req, res) => {
   try {
     const user = req.user;
 
@@ -501,7 +501,7 @@ export const changePassword = async (req, res) => {
 };
 
 // Request password reset
-export const forgotPassword = async (req, res) => {
+const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
 
@@ -544,7 +544,7 @@ export const forgotPassword = async (req, res) => {
 };
 
 // Reset password
-export const resetPassword = async (req, res) => {
+const resetPassword = async (req, res) => {
   try {
     const { token } = req.params;
     const { newPassword } = req.body;
@@ -589,7 +589,7 @@ export const resetPassword = async (req, res) => {
 };
 
 // Update user type (Admin only)
-export const updateUserType = async (req, res) => {
+const updateUserType = async (req, res) => {
   try {
     const { userId, userType } = req.body;
 
@@ -638,5 +638,20 @@ export const updateUserType = async (req, res) => {
 
 
 
-// ...existing code...
+module.exports = {
+  getProfile,
+  uploadResume,
+  getInterviewHistory,
+  register,
+  login,
+  googleCallback,
+  logout,
+  verifyEmail,
+  getCurrentUser,
+  updateProfile,
+  changePassword,
+  forgotPassword,
+  resetPassword,
+  updateUserType
+};
 
