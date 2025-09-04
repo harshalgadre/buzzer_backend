@@ -24,6 +24,7 @@ const ALLOWED_ORIGINS = [
   "http://localhost:3000",
   "http://localhost:4001",
   "http://localhost:6001",
+  "https://interview-backend-2-30dl.onrender.com/"
 ];
 const MONGODB_URI =
   process.env.MONGODB_URI ||
